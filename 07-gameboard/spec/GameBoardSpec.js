@@ -56,3 +56,45 @@
     colisionado con objetos de cierto tipo, no con todos los objetos.
 
 */
+
+describe("Clase GameBoard", function(){
+
+    var canvas, ctx;
+
+  beforeEach(function(){
+  // Hemos enlazado en jasmine/spec/javascript/fixtures el fichero index.html
+  loadFixtures('index.html');
+
+  canvas = $('#game')[0];
+  expect(canvas).toExist();
+
+  ctx = canvas.getContext('2d');
+  expect(ctx).toBeDefined();
+
+  oldGame = Game;
+  Game = {width: 320, height: 480};
+
+    });
+
+    afterEach(function(){
+  Game = oldGame;
+    });
+
+    it("add:Añade obj a objects", function(){
+      var gb = new GameBoard();
+      var foo={test:"add test"};
+      gb.add(foo);
+
+      expect(gb.objects[0].test).toEqual(foo.test);
+    });
+
+    it(" resetRemoved:Inicializar la lista de objetos pendientes de ser borrados", function(){
+      var gb = new GameBoard();
+      gb.resetRemoved();
+      expect(gb.removed).toBeDefined();
+    });
+
+
+
+
+});
