@@ -117,13 +117,57 @@ describe("Clase GameBoard", function(){
 
     it("iterate:aplica funcName a todos los objects", function(){
       var gb = new GameBoard();
-      var foo1="test1";
-      var foo2="test2";
-      gb.add(foo1);
-      gb.add(foo2);
+      var dum= new function(){
+        this.func= function(){return true};
+      };
+      spyOn(dum,"func");
+      gb.add(dum);
+      gb.iterate('func');
+
+      expect(dum.func).toHaveBeenCalled();
 
     }); 
 
+
+    it("detect:devuelve el primer true", function(){
+      var gb = new GameBoard();
+      var dum ="test";
+      var dum2="test2";  
+      gb.add(dum);
+      gb.add(dum2);
+      var dumf= function (){
+        return true;
+      }; 
+      expect(gb.detect(dumf)).toBe("test");
+    }); 
+/*  PORQUE NO ME DETECTA EL JASMIN CON ESTE CODIGO?
+    it("step:aplica el step", function(){
+      var gb = new GameBoard();
+      var dum ="test";
+      var dum2="test2";  
+
+      gb.add(dum);
+      gb.add(dum2);
+      spyOn(gb,"resetRemoved");
+      spyOn(gb,"iterate");
+      spyOn(gb,"finalizeRemoved");
+
+      //gb.step(1);
+
+      expect(gb.resetRemoved).toHaveBeenCalled();
+      expect(gb.iterate)toHaveBeenCalledWith('step',1);
+      expect(gb.finalizeRemoved).toHaveBeenCalled();
+
+    });
+*/
+    it("draw: dibuja llamando a iterate", function(){
+      var gb = new GameBoard();
+      spyOn(gb,"iterate")
+      gb.draw(ctx);
+
+      expect(gb.iterate).toHaveBeenCalledWith("draw",ctx);
+
+    }); 
 
 
 
