@@ -82,17 +82,47 @@ describe("Clase GameBoard", function(){
 
     it("add:Añade obj a objects", function(){
       var gb = new GameBoard();
-      var foo={test:"add test"};
+      var foo="test";
       gb.add(foo);
 
-      expect(gb.objects[0].test).toEqual(foo.test);
+      expect(gb.objects[0]).toEqual("test");
     });
 
-    it(" resetRemoved:Inicializar la lista de objetos pendientes de ser borrados", function(){
+    it("resetRemoved:Inicializar la lista de objetos pendientes de ser borrados", function(){
       var gb = new GameBoard();
       gb.resetRemoved();
       expect(gb.removed).toBeDefined();
     });
+
+    it("remove:añade a la lista de objetos marcados", function(){
+      var gb = new GameBoard();
+      gb.resetRemoved();
+
+      var foo="test";
+      gb.remove(foo);
+      expect(gb.removed[0]).toBeDefined();
+    });
+
+    it("finalizeRemoved:borra definitivamente", function(){
+      var gb = new GameBoard();
+      gb.resetRemoved();
+
+      var foo="test";
+      gb.add(foo);
+      gb.remove(foo);
+      expect(gb.objects[0]).toEqual("test");
+      gb.finalizeRemoved();
+      expect(gb.objects[0]).not.toEqual("test");
+    });    
+
+    it("iterate:aplica funcName a todos los objects", function(){
+      var gb = new GameBoard();
+      var foo1="test1";
+      var foo2="test2";
+      gb.add(foo1);
+      gb.add(foo2);
+
+    }); 
 
 
 
