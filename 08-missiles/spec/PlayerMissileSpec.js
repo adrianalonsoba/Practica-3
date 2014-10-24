@@ -52,6 +52,7 @@ describe("Clase PlayerMissile", function(){
     });
 
   SpriteSheet.map = {
+    ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 },
     missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 }
   };
 
@@ -79,7 +80,12 @@ describe("Clase PlayerMissile", function(){
       spyOn(SpriteSheet,"draw");
       pm.draw(ctx);
       expect(SpriteSheet.draw).toHaveBeenCalledWith(ctx,'missile',0,-9);
-
     }); 
 
+    it("firehold", function(){
+      Game.keys = { 32 :'fire'};
+      var ps= new PlayerShip();
+      ps.step(0.5);
+      expect(ps.firehold).toEqual(false);
+    }); 
 });
