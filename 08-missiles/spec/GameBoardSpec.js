@@ -140,7 +140,7 @@ describe("Clase GameBoard", function(){
       }; 
       expect(gb.detect(dumf)).toBe("test");
     }); 
-/*  PORQUE NO ME DETECTA EL JASMIN CON ESTE CODIGO?
+
     it("step:aplica el step", function(){
       var gb = new GameBoard();
       var dum ="test";
@@ -152,14 +152,14 @@ describe("Clase GameBoard", function(){
       spyOn(gb,"iterate");
       spyOn(gb,"finalizeRemoved");
 
-      //gb.step(1);
+      gb.step(1);
 
       expect(gb.resetRemoved).toHaveBeenCalled();
-      expect(gb.iterate)toHaveBeenCalledWith('step',1);
+      expect(gb.iterate).toHaveBeenCalledWith('step',1);
       expect(gb.finalizeRemoved).toHaveBeenCalled();
 
     });
-*/
+
     it("draw: dibuja llamando a iterate", function(){
       var gb = new GameBoard();
       spyOn(gb,"iterate")
